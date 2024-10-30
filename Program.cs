@@ -4,10 +4,9 @@ class Program
 {
     static void Main(string[] args)
     {
-        Meeting meeting = new Meeting();
-        Person person = new Person("Eirik");
-        person.InitDatabase();
-        meeting.InitDatabase();
-        System.Console.WriteLine(person.Name);
+        Person person1 = new Person("Eirik");
+        Person person2 = new Person("Victoria");
+        Meeting meeting = new Meeting("Møte mellom", person1, person2);
+        Console.WriteLine(meeting.MeetingName);
     }
 }

@@ -9,6 +9,13 @@ class Meeting
 
     public Person? SecondPerson { get; set; }
 
+    public Meeting(string MeetingName, Person? FirstPerson, Person? SecondPerson)
+    {
+        this.MeetingName = MeetingName;
+        this.FirstPerson = FirstPerson;
+        this.SecondPerson = SecondPerson;
+    }
+
     public SqliteConnection InitDatabase()
     {
         var db = new SqliteConnection("Data Source=database/meeting.sqlite");
