@@ -26,8 +26,8 @@ class Controller
         while (true)
         {
             _view.InlineMessage("Enter name: ");
-            string name = Console.ReadLine() ?? string.Empty;
-            if (string.IsNullOrEmpty(name) || name.Length < 2 || !name.All(char.IsLetter))
+            string? name = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(name) || name.Length < 2 || !name.All(char.IsLetter))
             {
                 _view.NewLineMessage("Name is invalid. Please enter a valid name.");
             }
@@ -38,12 +38,57 @@ class Controller
         }
     }
 
+    public string ParseString()
+    {
+        while (true)
+        {
+            string? input = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                _view.NewLineMessage("Please enter something.");
+            }
+            else
+            {
+                return input;
+            }
+        }
+    }
+
+    public int ParseInt()
+    {
+        int num;
+        while (!int.TryParse(Console.ReadLine(), out num))
+        {
+            _view.InlineMessage("Please enter a valid number: ");
+        }
+        return num;
+    }
+
     public void AddNewPerson()
     {
         Console.Clear();
         _view.NewLineMessage("Add new person");
         _view.NewLineMessage("");
-        _person.AddPerson(new Person(WriteName()));
+        _view.NewLineMessage($"Person added with ID {_person.AddPerson(new Person(WriteName()))}");
+        _view.NewLineMessage("Press any key to continue...");
+        Console.ReadKey();
+    }
+
+    public void AddNewMeeting()
+    {
+        Console.Clear();
+        _view.NewLineMessage("Add new meeting");
+        _view.NewLineMessage("What is the meeting about: ");
+        string? meetingMessage = Console.ReadLine();
+        _view.ViewPersons(_person.GetAllPersons());
+        _view.NewLineMessage("Please enter the first person in the meeting: ");
+        Person? person1 = _person.GetPersonById(ParseInt());
+        _view.NewLineMessage("Please enter the second person in the meeting");
+        Person? person2 = _person.GetPersonById(ParseInt());
+        int id = _meeting.NewMeeting(new Meeting(meetingMessage, person1, person2));
+        _view.NewLineMessage($"Meeting added with ID{id}");
+        _view.NewLineMessage("Press any key to continue...");
+        Console.ReadKey();
     }
 
     public void MainMenu()
@@ -60,9 +105,11 @@ class Controller
                     break;
                 case "2":
                     _view.ViewPersons(_person.GetAllPersons());
+                    _view.NewLineMessage("Press any key to continue...");
+                    Console.ReadKey();
                     break;
                 case "3":
-
+                    AddNewMeeting();
                     break;
                 case "4":
                     _view.ViewMeetings(_meeting.GetAllMeetings());

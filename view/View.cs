@@ -18,8 +18,6 @@ class View
             NewLineMessage(person.ToString());
         }
         NewLineMessage("");
-        NewLineMessage("Press any key to continue...");
-        Console.ReadKey();
     }
 
     public void ViewMeetings(List<Meeting> meetings)
