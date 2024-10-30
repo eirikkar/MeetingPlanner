@@ -23,7 +23,7 @@ class Meeting
         using (var cmd = db.CreateCommand())
         {
             cmd.CommandText =
-                @"CREATE TABLE IF NOT EXISTS Contacts (
+                @"CREATE TABLE IF NOT EXISTS Meetings (
                                 id INTEGER PRIMARY KEY,
                                 meetingname TEXT NOT NULL,
                                 firstperson TEXT NOT NULL, 

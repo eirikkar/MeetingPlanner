@@ -17,12 +17,25 @@ class Person
         using (var cmd = db.CreateCommand())
         {
             cmd.CommandText =
-                @"CREATE TABLE IF NOT EXISTS Contacts (
+                @"CREATE TABLE IF NOT EXISTS Persons (
                                 id INTEGER PRIMARY KEY,
                                 name TEXT NOT NULL
                             );";
             cmd.ExecuteNonQuery();
         }
         return db;
+    }
+
+    public int AddPerson(Person person)
+    {
+        using SqliteConnection db = InitDatabase();
+        db.Open();
+        using var sq = db.CreateCommand();
+        sq.CommandText = "INSERT INTO Persons (Name) VALUES (@Name)";
+        sq.Parameters.AddWithValue("@Name", person.Name);
+        sq.ExecuteNonQuery();
+        sq.CommandText = "SELECT last_insert_rowid()";
+        int id = Convert.ToInt32(sq.ExecuteScalar());
+        return id;
     }
 }
