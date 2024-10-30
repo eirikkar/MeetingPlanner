@@ -1,8 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "yYpf8bx2rQWvBQLAMQjyqNemPKAGDrG7Pl11KgdAnFH2snsD/s09KwDpVq3S7L3y0GWWvpVmw5Wrc4wCtgOWFg==",
+  "dgSpecHash": "aK/8lW1ijikJHawb8OQWefOE/jbAMrkAcTYlEKSqtUTHO1d4CoM/UuFg34tuCtt8oEg9pKzZC0Lvzng79hUIPg==",
   "success": true,
   "projectFilePath": "/home/eirik/code/MeetingPlanner/MeetingPlanner.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/home/eirik/.nuget/packages/microsoft.data.sqlite/8.0.10/microsoft.data.sqlite.8.0.10.nupkg.sha512",
+    "/home/eirik/.nuget/packages/microsoft.data.sqlite.core/8.0.10/microsoft.data.sqlite.core.8.0.10.nupkg.sha512",
+    "/home/eirik/.nuget/packages/sqlitepclraw.bundle_e_sqlite3/2.1.6/sqlitepclraw.bundle_e_sqlite3.2.1.6.nupkg.sha512",
+    "/home/eirik/.nuget/packages/sqlitepclraw.core/2.1.6/sqlitepclraw.core.2.1.6.nupkg.sha512",
+    "/home/eirik/.nuget/packages/sqlitepclraw.lib.e_sqlite3/2.1.6/sqlitepclraw.lib.e_sqlite3.2.1.6.nupkg.sha512",
+    "/home/eirik/.nuget/packages/sqlitepclraw.provider.e_sqlite3/2.1.6/sqlitepclraw.provider.e_sqlite3.2.1.6.nupkg.sha512",
+    "/home/eirik/.nuget/packages/system.memory/4.5.3/system.memory.4.5.3.nupkg.sha512"
+  ],
   "logs": []
 }
