@@ -20,4 +20,21 @@ class Controller
     {
         return new List<Meeting>() { };
     }
+
+    public string? WriteName()
+    {
+        while (true)
+        {
+            _view.InlineMessage("Enter name: ");
+            string? name = Console.ReadLine();
+            if (string.IsNullOrEmpty(name) || name.Length < 2 || !name.All(char.IsLetter))
+            {
+                _view.NewLineMessage("Name is invalid. Please enter a valid name.");
+            }
+            else
+            {
+                return name;
+            }
+        }
+    }
 }

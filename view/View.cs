@@ -1,19 +1,20 @@
 class View
 {
-    public string? WriteName()
+    public void NewLineMessage(string message)
     {
-        while (true)
+        Console.WriteLine(message);
+    }
+
+    public void InlineMessage(string message)
+    {
+        Console.Write(message);
+    }
+
+    public void ViewPersons(List<Person> persons)
+    {
+        foreach (Person person in persons)
         {
-            Console.Write("Enter name: ");
-            string? name = Console.ReadLine();
-            if (string.IsNullOrEmpty(name) || name.Length < 2 || !name.All(char.IsLetter))
-            {
-                Console.WriteLine("Name is invalid. Please enter a valid name.");
-            }
-            else
-            {
-                return name;
-            }
+            NewLineMessage(person.ToString());
         }
     }
 }
