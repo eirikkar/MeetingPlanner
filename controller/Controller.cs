@@ -65,7 +65,7 @@ class Controller
 
                     break;
                 case "4":
-
+                    _view.ViewMeetings(_meeting.GetAllMeetings());
                     break;
                 case "5":
                     exit = true;

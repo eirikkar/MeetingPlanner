@@ -22,6 +22,20 @@ class View
         Console.ReadKey();
     }
 
+    public void ViewMeetings(List<Meeting> meetings)
+    {
+        Console.Clear();
+        foreach (Meeting meeting in meetings)
+        {
+            NewLineMessage(
+                $"Meeting {meeting.MeetingName} With {meeting.FirstPerson?.Name} and {meeting.SecondPerson?.Name}"
+            );
+        }
+        NewLineMessage("");
+        NewLineMessage("Press any key to continue...");
+        Console.ReadKey();
+    }
+
     public void ViewMainMenu()
     {
         Console.Clear();
