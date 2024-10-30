@@ -3,14 +3,15 @@ using Microsoft.Data.Sqlite;
 class Person
 {
     public int Id { get; set; }
-    public string? FirstName { get; set; }
-    public string? LastName { get; set; }
+    public string? Name { get; set; }
 
-    public Person(int id, string firstName, string lastName)
+    public DateTime MeetTime { get; set; }
+
+    public Person(int id, string name, DateTime meetTime)
     {
-        FirstName = firstName;
-        LastName = lastName;
+        Name = name;
         Id = id;
+        MeetTime = meetTime;
     }
 
     public SqliteConnection InitDatabase()
@@ -22,8 +23,8 @@ class Person
             cmd.CommandText =
                 @"CREATE TABLE IF NOT EXISTS Contacts (
                                 id INTEGER PRIMARY KEY,
-                                firstname TEXT NOT NULL,
-                                lastname TEXT NOT NULL
+                                name TEXT NOT NULL,
+                                datetime TEXT NOT NULL
                             );";
             cmd.ExecuteNonQuery();
         }
