@@ -10,6 +10,8 @@ class Person
         Name = name;
     }
 
+    public Person() { }
+
     public SqliteConnection InitDatabase()
     {
         var db = new SqliteConnection("Data Source=database/person.sqlite");
@@ -76,6 +78,6 @@ class Person
 
     public override string ToString()
     {
-        return $"#{Id} Name: {Name}";
+        return $"# {Id} Name: {Name}";
     }
 }

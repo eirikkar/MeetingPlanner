@@ -16,6 +16,8 @@ class Meeting
         this.SecondPerson = SecondPerson;
     }
 
+    public Meeting() { }
+
     public SqliteConnection InitDatabase()
     {
         var db = new SqliteConnection("Data Source=database/meeting.sqlite");
