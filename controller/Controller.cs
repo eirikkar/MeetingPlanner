@@ -8,4 +8,9 @@ class Controller
         _person = person;
         _view = view;
     }
+
+    public List<Person> Persons()
+    {
+        return new List<Person>() { };
+    }
 }

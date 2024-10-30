@@ -4,8 +4,8 @@ class Program
 {
     static void Main(string[] args)
     {
-        Person person = new Person(1, "Eirik", DateTime.Now);
+        Person person = new Person(1, "Eirik");
         person.InitDatabase();
-        System.Console.WriteLine(person.MeetTime);
+        System.Console.WriteLine(person.Name);
     }
 }

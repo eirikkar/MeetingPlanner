@@ -5,26 +5,22 @@ class Person
     public int Id { get; set; }
     public string? Name { get; set; }
 
-    public DateTime MeetTime { get; set; }
-
-    public Person(int id, string name, DateTime meetTime)
+    public Person(int id, string name)
     {
         Name = name;
         Id = id;
-        MeetTime = meetTime;
     }
 
     public SqliteConnection InitDatabase()
     {
-        var db = new SqliteConnection("Data Source=database/db.sqlite");
+        var db = new SqliteConnection("Data Source=database/person.sqlite");
         db.Open();
         using (var cmd = db.CreateCommand())
         {
             cmd.CommandText =
                 @"CREATE TABLE IF NOT EXISTS Contacts (
                                 id INTEGER PRIMARY KEY,
-                                name TEXT NOT NULL,
-                                datetime TEXT NOT NULL
+                                name TEXT NOT NULL
                             );";
             cmd.ExecuteNonQuery();
         }
