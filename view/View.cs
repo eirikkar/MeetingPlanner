@@ -26,7 +26,7 @@ class View
         foreach (Meeting meeting in meetings)
         {
             NewLineMessage(
-                $"Meeting {meeting.MeetingName} With {meeting.FirstPerson?.Name} and {meeting.SecondPerson?.Name}"
+                $"Meeting: \"{meeting.MeetingName}\" with {meeting.FirstPerson?.Name} and {meeting.SecondPerson?.Name}"
             );
         }
         NewLineMessage("");

@@ -80,11 +80,18 @@ class Controller
         _view.NewLineMessage("Add new meeting");
         _view.NewLineMessage("What is the meeting about: ");
         string? meetingMessage = Console.ReadLine();
+
+        Console.Clear();
         _view.ViewPersons(_person.GetAllPersons());
         _view.NewLineMessage("Please enter the first person in the meeting: ");
         Person? person1 = _person.GetPersonById(ParseInt());
+
+        Console.Clear();
+        _view.ViewPersons(_person.GetAllPersons());
         _view.NewLineMessage("Please enter the second person in the meeting");
         Person? person2 = _person.GetPersonById(ParseInt());
+
+        Console.Clear();
         int id = _meeting.NewMeeting(new Meeting(meetingMessage, person1, person2));
         _view.NewLineMessage($"Meeting added with ID{id}");
         _view.NewLineMessage("Press any key to continue...");
