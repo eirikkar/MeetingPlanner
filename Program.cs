@@ -4,8 +4,10 @@ class Program
 {
     static void Main(string[] args)
     {
-        Person person = new Person(1, "Eirik");
+        Meeting meeting = new Meeting();
+        Person person = new Person("Eirik");
         person.InitDatabase();
+        meeting.InitDatabase();
         System.Console.WriteLine(person.Name);
     }
 }

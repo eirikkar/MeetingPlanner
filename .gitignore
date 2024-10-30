@@ -1,3 +1,4 @@
 bin/
 obj/
-database/db.sqlite
+database/meeting.sqlite
+database/person.sqlite
