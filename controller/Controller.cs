@@ -13,6 +13,10 @@ class Controller
         _meeting = meeting;
     }
 
+    /// <summary>
+    /// Takes input from console and checks if the string is empty and less than 2 chars
+    /// </summary>
+    /// <returns>string from console</returns>
     public string WriteName()
     {
         while (true)
@@ -30,6 +34,10 @@ class Controller
         }
     }
 
+    /// <summary>
+    /// Takes string from console and checks if the string is empty
+    /// </summary>
+    /// <returns>input</returns>
     public string ParseString()
     {
         while (true)
@@ -46,6 +54,10 @@ class Controller
         }
     }
 
+    /// <summary>
+    /// Takes input from console parses it into a number, checks the person database count and returns lower number
+    /// </summary>
+    /// <returns>number</returns>
     public int ParsePerson()
     {
         while (true)
@@ -64,6 +76,10 @@ class Controller
         }
     }
 
+    /// <summary>
+    /// Takes input from console parses it into a number, checks the meeting database count and returns lower number
+    /// </summary>
+    /// <returns></returns>
     public int ParseMeeting()
     {
         while (true)
@@ -86,6 +102,10 @@ class Controller
         }
     }
 
+    /// <summary>
+    /// Parses datetime from console to DateTime, uses norwegian culture.
+    /// </summary>
+    /// <returns>DateTime</returns>
     public DateTime ParseDateTime()
     {
         DateTime dt;
@@ -96,6 +116,9 @@ class Controller
         return dt;
     }
 
+    /// <summary>
+    /// Adds a new person, shows the ID of the person added.
+    /// </summary>
     public void AddNewPerson()
     {
         Console.Clear();
@@ -106,6 +129,9 @@ class Controller
         Console.ReadKey();
     }
 
+    /// <summary>
+    /// Deletes person, shows the ID of the person deleted.
+    /// </summary>
     public void DeletePerson()
     {
         Console.Clear();
@@ -120,12 +146,16 @@ class Controller
         Console.ReadKey();
     }
 
+    /// <summary>
+    /// Deletes meeting, shows the ID of meeting deleted.
+    /// </summary>
     public void DeleteMeeting()
     {
         Console.Clear();
         _view.NewLineMessage("Delete Meeting");
         _view.ViewMeetings(_meeting.GetAllMeetings());
-        _view.NewLineMessage(
+        _view.NewLineMessage("");
+        _view.InlineMessage(
             "Type the number of the person you want to delete or type r to return to main menu: "
         );
         int id = _meeting.DeleteMeeting(ParseMeeting());
@@ -134,6 +164,10 @@ class Controller
         Console.ReadKey();
     }
 
+    /// <summary>
+    /// Parses message, checks if the input is not null or whitespace, and checks that it is just letters, numbers, space and -_
+    /// </summary>
+    /// <returns>input</returns>
     public string ParseMessage()
     {
         while (true)
@@ -153,6 +187,9 @@ class Controller
         }
     }
 
+    /// <summary>
+    /// Adds a new meeting, shows the ID of the meeting created.
+    /// </summary>
     public void AddNewMeeting()
     {
         Console.Clear();
@@ -183,6 +220,10 @@ class Controller
         Console.ReadKey();
     }
 
+    /// <summary>
+    /// Checks for input r or R and returns the user to main menu
+    /// </summary>
+    /// <param name="input"></param>
     public void ReturnToMainMenu(string? input)
     {
         if (!string.IsNullOrEmpty(input) && (input[0] == 'r' || input[0] == 'R'))
@@ -191,6 +232,9 @@ class Controller
         }
     }
 
+    /// <summary>
+    /// Person menu loop
+    /// </summary>
     public void PersonMenu()
     {
         while (true)
@@ -220,6 +264,9 @@ class Controller
         }
     }
 
+    /// <summary>
+    /// Main menu loop
+    /// </summary>
     public void MainMenu()
     {
         while (true)

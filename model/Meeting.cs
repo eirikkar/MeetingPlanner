@@ -24,6 +24,10 @@ class Meeting
 
     public Meeting() { }
 
+    /// <summary>
+    /// Initializes the meeting database, creates table if it does not exist.
+    /// </summary>
+    /// <returns>database</returns>
     public SqliteConnection InitDatabase()
     {
         try
@@ -51,6 +55,11 @@ class Meeting
         }
     }
 
+    /// <summary>
+    /// Creates a new meeting in the database, returns the id of the meeting
+    /// </summary>
+    /// <param name="meeting"></param>
+    /// <returns>id</returns>
     public int NewMeeting(Meeting meeting)
     {
         try
@@ -76,6 +85,10 @@ class Meeting
         }
     }
 
+    /// <summary>
+    /// Gets all the meetings from the database and returns them as a list
+    /// </summary>
+    /// <returns>list of meetings</returns>
     public List<Meeting> GetAllMeetings()
     {
         try
@@ -109,6 +122,11 @@ class Meeting
         }
     }
 
+    /// <summary>
+    /// Deletes a meeting with id, reassings the meetings when a meeting is deleted.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns>id of deleted meeting</returns>
     public int DeleteMeeting(int id)
     {
         try
@@ -132,6 +150,10 @@ class Meeting
         }
     }
 
+    /// <summary>
+    /// Returns the number of meetings in the database as integer
+    /// </summary>
+    /// <returns>int</returns>
     public int GetMeetingCount()
     {
         try
@@ -150,6 +172,9 @@ class Meeting
         }
     }
 
+    /// <summary>
+    /// Reassings the IDs of meetings
+    /// </summary>
     public void ReassignIds()
     {
         try

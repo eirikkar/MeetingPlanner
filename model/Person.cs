@@ -12,6 +12,10 @@ class Person
 
     public Person() { }
 
+    /// <summary>
+    /// Initializes the person database, creates the table if it does not exist.
+    /// </summary>
+    /// <returns></returns>
     public SqliteConnection InitDatabase()
     {
         try
@@ -36,6 +40,11 @@ class Person
         }
     }
 
+    /// <summary>
+    /// Adds person to the database
+    /// </summary>
+    /// <param name="person"></param>
+    /// <returns>id of person added</returns>
     public int AddPerson(Person person)
     {
         try
@@ -57,6 +66,11 @@ class Person
         }
     }
 
+    /// <summary>
+    /// Gets person by id in the database
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns>new person</returns>
     public Person? GetPersonById(int id)
     {
         try
@@ -83,6 +97,10 @@ class Person
         }
     }
 
+    /// <summary>
+    /// Gets all persons from the database and retunrs it as a list.
+    /// </summary>
+    /// <returns>list of persons</returns>
     public List<Person> GetAllPersons()
     {
         try
@@ -108,6 +126,11 @@ class Person
         }
     }
 
+    /// <summary>
+    /// Deletes person from the database, reassings the ids when the person is deleted.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns>id of deleted person</returns>
     public int DeletePerson(int id)
     {
         try
@@ -131,6 +154,10 @@ class Person
         }
     }
 
+    /// <summary>
+    /// Gets the number of all the persons in the database, returns as integer
+    /// </summary>
+    /// <returns>count</returns>
     public int GetPersonCount()
     {
         try
@@ -149,6 +176,9 @@ class Person
         }
     }
 
+    /// <summary>
+    /// Reassings IDs in the database
+    /// </summary>
     public void ReassignIds()
     {
         try
