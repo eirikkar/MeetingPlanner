@@ -1,4 +1,6 @@
-﻿namespace MeetingPlanner;
+﻿using System.Globalization;
+
+namespace MeetingPlanner;
 
 class Program
 {
@@ -8,6 +10,10 @@ class Program
         Person person = new Person();
         Meeting meeting = new Meeting();
         Controller controller = new Controller(person, view, meeting);
-        controller.MainMenu();
+        //controller.MainMenu();
+        var cultureInfo = new CultureInfo("no-NO");
+        string? dateString = Console.ReadLine();
+        var dateTime = DateTime.Parse(dateString ?? "", cultureInfo);
+        Console.WriteLine(dateTime.ToString(cultureInfo));
     }
 }

@@ -9,6 +9,10 @@ class Meeting
 
     public Person? SecondPerson { get; set; }
 
+    public string? Place { get; set; }
+
+    public DateTime? When { get; set; }
+
     public Meeting(string? meetingName, Person? firstPerson, Person? secondPerson)
     {
         MeetingName = meetingName;
