@@ -1,3 +1,5 @@
+using System.Globalization;
+
 class Controller
 {
     private Person _person;
@@ -64,6 +66,22 @@ class Controller
         return num;
     }
 
+    public DateTime ParseDateTime()
+    {
+        DateTime dt;
+        while (
+            !DateTime.TryParse(
+                Console.ReadLine(),
+                CultureInfo.CreateSpecificCulture("no-NO"),
+                out dt
+            )
+        )
+        {
+            _view.NewLineMessage("Invalid input, please enter a valid date and time: ");
+        }
+        return dt;
+    }
+
     public void AddNewPerson()
     {
         Console.Clear();
@@ -92,7 +110,11 @@ class Controller
         Person? person2 = _person.GetPersonById(ParseInt());
 
         Console.Clear();
-        int id = _meeting.NewMeeting(new Meeting(meetingMessage, person1, person2));
+        _view.NewLineMessage("Please enter the date of the meeting(dd.mm.yyyy tt:tt): ");
+        DateTime dt = ParseDateTime();
+
+        Console.Clear();
+        int id = _meeting.NewMeeting(new Meeting(meetingMessage, person1, person2, dt));
         _view.NewLineMessage($"Meeting added with ID{id}");
         _view.NewLineMessage("Press any key to continue...");
         Console.ReadKey();

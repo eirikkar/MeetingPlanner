@@ -75,9 +75,4 @@ class Person
 
         return persons;
     }
-
-    public override string ToString()
-    {
-        return $"# {Id} Name: {Name}";
-    }
 }

@@ -1,3 +1,4 @@
+using System.Globalization;
 using Microsoft.Data.Sqlite;
 
 class Meeting
@@ -11,13 +12,16 @@ class Meeting
 
     public string? Place { get; set; }
 
-    public DateTime? When { get; set; }
+    public DateTime? Date { get; set; }
 
-    public Meeting(string? meetingName, Person? firstPerson, Person? secondPerson)
+    public static readonly CultureInfo NorwegianCulture = new CultureInfo("nb-NO");
+
+    public Meeting(string? meetingName, Person? firstPerson, Person? secondPerson, DateTime? date)
     {
         MeetingName = meetingName;
         FirstPerson = firstPerson;
         SecondPerson = secondPerson;
+        Date = date;
     }
 
     public Meeting() { }
@@ -33,7 +37,8 @@ class Meeting
                                 id INTEGER PRIMARY KEY,
                                 meetingname TEXT NOT NULL,
                                 firstperson TEXT NOT NULL, 
-                                secondperson TEXT NOT NULL
+                                secondperson TEXT NOT NULL,
+                                date TEXT NOT NULL
                             );";
             cmd.ExecuteNonQuery();
         }
@@ -46,10 +51,11 @@ class Meeting
         db.Open();
         using var sq = db.CreateCommand();
         sq.CommandText =
-            "INSERT INTO Meetings (MeetingName, FirstPerson, SecondPerson) VALUES (@MeetingName, @FirstPerson, @SecondPerson)";
+            "INSERT INTO Meetings (MeetingName, FirstPerson, SecondPerson, Date) VALUES (@MeetingName, @FirstPerson, @SecondPerson, @Date)";
         sq.Parameters.AddWithValue("@MeetingName", meeting.MeetingName);
         sq.Parameters.AddWithValue("@FirstPerson", meeting.FirstPerson?.Name);
         sq.Parameters.AddWithValue("@SecondPerson", meeting.SecondPerson?.Name);
+        sq.Parameters.AddWithValue("@Date", meeting.Date?.ToString(NorwegianCulture));
         sq.ExecuteNonQuery();
         sq.CommandText = "SELECT last_insert_rowid()";
         int id = Convert.ToInt32(sq.ExecuteScalar());
@@ -69,7 +75,8 @@ class Meeting
             var meeting = new Meeting(
                 reader.GetString(1),
                 new Person(reader.GetString(2)),
-                new Person(reader.GetString(3))
+                new Person(reader.GetString(3)),
+                DateTime.Parse(reader.GetString(4), NorwegianCulture)
             )
             {
                 Id = reader.GetInt32(0),
