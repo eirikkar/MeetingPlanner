@@ -1,3 +1,5 @@
+using System.Text.RegularExpressions;
+
 class Controller
 {
     private Person _person;
@@ -142,12 +144,33 @@ class Controller
         Console.ReadKey();
     }
 
+    public string ParseMessage()
+    {
+        while (true)
+        {
+            string? input = Console.ReadLine();
+            ReturnToMainMenu(input);
+            if (
+                !string.IsNullOrWhiteSpace(input) && Regex.Match(input, "^[A-Za-z0-9 _-]*$").Success
+            )
+            {
+                return input;
+            }
+            else
+            {
+                _view.InlineMessage("Only characters and digits press r to return to menu: ");
+            }
+        }
+    }
+
     public void AddNewMeeting()
     {
         Console.Clear();
         _view.NewLineMessage("Add new meeting");
-        _view.NewLineMessage("What is the meeting about: ");
-        string? meetingMessage = Console.ReadLine();
+        _view.NewLineMessage(
+            "Press r to return to main menu or type what is the meeting is about: "
+        );
+        string meetingMessage = ParseMessage();
 
         Console.Clear();
         _view.ViewPersons(_person.GetAllPersons());
