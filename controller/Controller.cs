@@ -130,8 +130,7 @@ class Controller
 
     public void PersonMenu()
     {
-        bool exit = false;
-        while (!exit)
+        while (true)
         {
             _view.ViewPersonMenu();
             switch (Console.ReadLine())
@@ -159,8 +158,7 @@ class Controller
 
     public void MainMenu()
     {
-        bool exit = false;
-        while (!exit)
+        while (true)
         {
             _view.ViewMainMenu();
 
