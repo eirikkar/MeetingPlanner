@@ -13,16 +13,6 @@ class Controller
         _meeting = meeting;
     }
 
-    public List<Person> Persons()
-    {
-        return new List<Person>() { };
-    }
-
-    public List<Meeting> Meetings()
-    {
-        return new List<Meeting>() { };
-    }
-
     public string WriteName()
     {
         while (true)
@@ -193,6 +183,14 @@ class Controller
         Console.ReadKey();
     }
 
+    public void ReturnToMainMenu(string? input)
+    {
+        if (!string.IsNullOrEmpty(input) && (input[0] == 'r' || input[0] == 'R'))
+        {
+            MainMenu();
+        }
+    }
+
     public void PersonMenu()
     {
         while (true)
@@ -219,14 +217,6 @@ class Controller
                     Environment.Exit(5);
                     break;
             }
-        }
-    }
-
-    public void ReturnToMainMenu(string? input)
-    {
-        if (!string.IsNullOrEmpty(input) && (input[0] == 'r' || input[0] == 'R'))
-        {
-            MainMenu();
         }
     }
 
