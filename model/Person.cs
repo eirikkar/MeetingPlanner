@@ -75,4 +75,55 @@ class Person
 
         return persons;
     }
+
+    public int DeleteContact(int id)
+    {
+        using SqliteConnection db = InitDatabase();
+        db.Open();
+
+        using (var sq = db.CreateCommand())
+        {
+            sq.CommandText = "DELETE FROM Persons WHERE Id = @Id";
+            sq.Parameters.AddWithValue("@Id", id);
+            sq.ExecuteNonQuery();
+        }
+        ReassignIds();
+        return id;
+    }
+
+    public int GetCount()
+    {
+        using SqliteConnection db = InitDatabase();
+        db.Open();
+        using var sq = db.CreateCommand();
+        sq.CommandText = "SELECT COUNT(*) FROM Persons";
+        int count = Convert.ToInt32(sq.ExecuteScalar());
+        return count;
+    }
+
+    public void ReassignIds()
+    {
+        using var db = InitDatabase();
+        db.Open();
+        using var transaction = db.BeginTransaction();
+        var cmd = new SqliteCommand("SELECT id FROM Persons ORDER BY id", db, transaction);
+        var reader = cmd.ExecuteReader();
+        int newId = 1;
+
+        while (reader.Read())
+        {
+            int oldId = reader.GetInt32(0);
+            var updateCmd = new SqliteCommand(
+                "UPDATE Persons SET id = @newId WHERE id = @oldId",
+                db,
+                transaction
+            );
+            updateCmd.Parameters.AddWithValue("@newId", newId);
+            updateCmd.Parameters.AddWithValue("@oldId", oldId);
+            updateCmd.ExecuteNonQuery();
+            newId++;
+        }
+
+        transaction.Commit();
+    }
 }

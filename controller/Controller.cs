@@ -1,5 +1,3 @@
-using System.Globalization;
-
 class Controller
 {
     private Person _person;
@@ -56,12 +54,16 @@ class Controller
         }
     }
 
-    public int ParseInt()
+    public int ParsePerson()
     {
         int num;
-        while (!int.TryParse(Console.ReadLine(), out num))
         {
-            _view.InlineMessage("Please enter a valid number: ");
+            while (
+                !int.TryParse(Console.ReadLine(), out num)
+                || num < 0
+                || num >= _person.GetCount() + 1
+            )
+                _view.InlineMessage("Please enter a valid number: ");
         }
         return num;
     }
@@ -69,13 +71,7 @@ class Controller
     public DateTime ParseDateTime()
     {
         DateTime dt;
-        while (
-            !DateTime.TryParse(
-                Console.ReadLine(),
-                CultureInfo.CreateSpecificCulture("no-NO"),
-                out dt
-            )
-        )
+        while (!DateTime.TryParse(Console.ReadLine(), Meeting.NorwegianCulture, out dt))
         {
             _view.NewLineMessage("Invalid input, please enter a valid date and time: ");
         }
@@ -92,6 +88,18 @@ class Controller
         Console.ReadKey();
     }
 
+    public void DeletePerson()
+    {
+        Console.Clear();
+        _view.NewLineMessage("Delete Person");
+        _view.ViewPersons(_person.GetAllPersons());
+        _view.NewLineMessage("Type the number of the person you want to delete: ");
+        int id = _person.DeleteContact(ParsePerson());
+        _view.NewLineMessage($"Person deleted with #{id}");
+        _view.NewLineMessage("Press any key to continue...");
+        Console.ReadKey();
+    }
+
     public void AddNewMeeting()
     {
         Console.Clear();
@@ -102,12 +110,12 @@ class Controller
         Console.Clear();
         _view.ViewPersons(_person.GetAllPersons());
         _view.NewLineMessage("Please enter the first person in the meeting: ");
-        Person? person1 = _person.GetPersonById(ParseInt());
+        Person? person1 = _person.GetPersonById(ParsePerson());
 
         Console.Clear();
         _view.ViewPersons(_person.GetAllPersons());
         _view.NewLineMessage("Please enter the second person in the meeting");
-        Person? person2 = _person.GetPersonById(ParseInt());
+        Person? person2 = _person.GetPersonById(ParsePerson());
 
         Console.Clear();
         _view.NewLineMessage("Please enter the date of the meeting(dd.mm.yyyy tt:tt): ");
@@ -138,12 +146,15 @@ class Controller
                     Console.ReadKey();
                     break;
                 case "3":
-                    AddNewMeeting();
+                    DeletePerson();
                     break;
                 case "4":
-                    _view.ViewMeetings(_meeting.GetAllMeetings());
+                    AddNewMeeting();
                     break;
                 case "5":
+                    _view.ViewMeetings(_meeting.GetAllMeetings());
+                    break;
+                case "6":
                     exit = true;
                     break;
             }

@@ -40,8 +40,9 @@ class View
         Console.WriteLine("Meeting Planner");
         Console.WriteLine("1. Add Person");
         Console.WriteLine("2. View Persons");
-        Console.WriteLine("3. Add Meeting");
-        Console.WriteLine("4. View Meetings");
-        Console.WriteLine("5. Exit");
+        Console.WriteLine("3. Delete Person");
+        Console.WriteLine("4. Add Meeting");
+        Console.WriteLine("5. View Meetings");
+        Console.WriteLine("6. Exit");
     }
 }
