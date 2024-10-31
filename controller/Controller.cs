@@ -128,13 +128,12 @@ class Controller
         Console.ReadKey();
     }
 
-    public void MainMenu()
+    public void PersonMenu()
     {
         bool exit = false;
         while (!exit)
         {
-            _view.ViewMainMenu();
-
+            _view.ViewPersonMenu();
             switch (Console.ReadLine())
             {
                 case "1":
@@ -149,13 +148,38 @@ class Controller
                     DeletePerson();
                     break;
                 case "4":
-                    AddNewMeeting();
+                    MainMenu();
                     break;
                 case "5":
+                    Environment.Exit(5);
+                    break;
+            }
+        }
+    }
+
+    public void MainMenu()
+    {
+        bool exit = false;
+        while (!exit)
+        {
+            _view.ViewMainMenu();
+
+            switch (Console.ReadLine())
+            {
+                case "1":
+                    PersonMenu();
+                    break;
+                case "2":
+                    AddNewMeeting();
+                    break;
+                case "3":
                     _view.ViewMeetings(_meeting.GetAllMeetings());
                     break;
-                case "6":
-                    exit = true;
+                case "4":
+
+                    break;
+                case "5":
+                    Environment.Exit(5);
                     break;
             }
         }

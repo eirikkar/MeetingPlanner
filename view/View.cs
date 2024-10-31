@@ -38,11 +38,20 @@ class View
     {
         Console.Clear();
         Console.WriteLine("Meeting Planner");
+        Console.WriteLine("1. Person menu");
+        Console.WriteLine("2. Add Meeting");
+        Console.WriteLine("3. View Meetings");
+        Console.WriteLine("4. Delete Meeting");
+        Console.WriteLine("5. Exit");
+    }
+
+    public void ViewPersonMenu()
+    {
+        Console.Clear();
         Console.WriteLine("1. Add Person");
         Console.WriteLine("2. View Persons");
         Console.WriteLine("3. Delete Person");
-        Console.WriteLine("4. Add Meeting");
-        Console.WriteLine("5. View Meetings");
-        Console.WriteLine("6. Exit");
+        Console.WriteLine("4. Back to Main menu");
+        Console.WriteLine("5. Exit");
     }
 }
