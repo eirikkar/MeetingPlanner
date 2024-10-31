@@ -56,16 +56,42 @@ class Controller
 
     public int ParsePerson()
     {
-        int num;
+        while (true)
         {
-            while (
-                !int.TryParse(Console.ReadLine(), out num)
-                || num < 0
-                || num >= _person.GetCount() + 1
-            )
-                _view.InlineMessage("Please enter a valid number: ");
+            string? input = Console.ReadLine();
+            ReturnToMainMenu(input);
+
+            if (!int.TryParse(input, out int num) || num < 0 || num >= _person.GetPersonCount() + 1)
+            {
+                _view.InlineMessage("Please enter a valid number or type r to return: ");
+            }
+            else
+            {
+                return num;
+            }
         }
-        return num;
+    }
+
+    public int ParseMeeting()
+    {
+        while (true)
+        {
+            string? input = Console.ReadLine();
+            ReturnToMainMenu(input);
+
+            if (
+                !int.TryParse(input, out int num)
+                || num < 0
+                || num >= _meeting.GetMeetingCount() + 1
+            )
+            {
+                _view.InlineMessage("Please enter a valid number or type r to return: ");
+            }
+            else
+            {
+                return num;
+            }
+        }
     }
 
     public DateTime ParseDateTime()
@@ -93,9 +119,25 @@ class Controller
         Console.Clear();
         _view.NewLineMessage("Delete Person");
         _view.ViewPersons(_person.GetAllPersons());
-        _view.NewLineMessage("Type the number of the person you want to delete: ");
-        int id = _person.DeleteContact(ParsePerson());
+        _view.NewLineMessage(
+            "Type the number of the person you want to delete or type r to return to main menu: "
+        );
+        int id = _person.DeletePerson(ParsePerson());
         _view.NewLineMessage($"Person deleted with #{id}");
+        _view.NewLineMessage("Press any key to continue...");
+        Console.ReadKey();
+    }
+
+    public void DeleteMeeting()
+    {
+        Console.Clear();
+        _view.NewLineMessage("Delete Meeting");
+        _view.ViewMeetings(_meeting.GetAllMeetings());
+        _view.NewLineMessage(
+            "Type the number of the person you want to delete or type r to return to main menu: "
+        );
+        int id = _meeting.DeleteMeeting(ParseMeeting());
+        _view.NewLineMessage($"Meeting deleted with #{id}");
         _view.NewLineMessage("Press any key to continue...");
         Console.ReadKey();
     }
@@ -140,6 +182,7 @@ class Controller
                     break;
                 case "2":
                     _view.ViewPersons(_person.GetAllPersons());
+                    _view.NewLineMessage("");
                     _view.NewLineMessage("Press any key to continue...");
                     Console.ReadKey();
                     break;
@@ -153,6 +196,14 @@ class Controller
                     Environment.Exit(5);
                     break;
             }
+        }
+    }
+
+    public void ReturnToMainMenu(string? input)
+    {
+        if (!string.IsNullOrEmpty(input) && (input[0] == 'r' || input[0] == 'R'))
+        {
+            MainMenu();
         }
     }
 
@@ -172,9 +223,12 @@ class Controller
                     break;
                 case "3":
                     _view.ViewMeetings(_meeting.GetAllMeetings());
+                    _view.NewLineMessage("");
+                    _view.NewLineMessage("Press any key to continue...");
+                    Console.ReadKey();
                     break;
                 case "4":
-
+                    DeleteMeeting();
                     break;
                 case "5":
                     Environment.Exit(5);

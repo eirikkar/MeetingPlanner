@@ -10,8 +10,6 @@ class Meeting
 
     public Person? SecondPerson { get; set; }
 
-    public string? Place { get; set; }
-
     public DateTime? Date { get; set; }
 
     public static readonly CultureInfo NorwegianCulture = new CultureInfo("nb-NO");
@@ -85,5 +83,56 @@ class Meeting
         }
 
         return meetings;
+    }
+
+    public int DeleteMeeting(int id)
+    {
+        using SqliteConnection db = InitDatabase();
+        db.Open();
+
+        using (var sq = db.CreateCommand())
+        {
+            sq.CommandText = "DELETE FROM Meetings WHERE Id = @Id";
+            sq.Parameters.AddWithValue("@Id", id);
+            sq.ExecuteNonQuery();
+        }
+        ReassignIds();
+        return id;
+    }
+
+    public int GetMeetingCount()
+    {
+        using SqliteConnection db = InitDatabase();
+        db.Open();
+        using var sq = db.CreateCommand();
+        sq.CommandText = "SELECT COUNT(*) FROM Meetings";
+        int count = Convert.ToInt32(sq.ExecuteScalar());
+        return count;
+    }
+
+    public void ReassignIds()
+    {
+        using var db = InitDatabase();
+        db.Open();
+        using var transaction = db.BeginTransaction();
+        var cmd = new SqliteCommand("SELECT id FROM Meetings ORDER BY id", db, transaction);
+        var reader = cmd.ExecuteReader();
+        int newId = 1;
+
+        while (reader.Read())
+        {
+            int oldId = reader.GetInt32(0);
+            var updateCmd = new SqliteCommand(
+                "UPDATE Meetings SET id = @newId WHERE id = @oldId",
+                db,
+                transaction
+            );
+            updateCmd.Parameters.AddWithValue("@newId", newId);
+            updateCmd.Parameters.AddWithValue("@oldId", oldId);
+            updateCmd.ExecuteNonQuery();
+            newId++;
+        }
+
+        transaction.Commit();
     }
 }

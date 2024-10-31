@@ -76,7 +76,7 @@ class Person
         return persons;
     }
 
-    public int DeleteContact(int id)
+    public int DeletePerson(int id)
     {
         using SqliteConnection db = InitDatabase();
         db.Open();
@@ -91,7 +91,7 @@ class Person
         return id;
     }
 
-    public int GetCount()
+    public int GetPersonCount()
     {
         using SqliteConnection db = InitDatabase();
         db.Open();

@@ -29,9 +29,6 @@ class View
                 $"Meeting: '{meeting.MeetingName}' with {meeting.FirstPerson?.Name} and {meeting.SecondPerson?.Name} at {meeting.Date?.ToString(Meeting.NorwegianCulture)}"
             );
         }
-        NewLineMessage("");
-        NewLineMessage("Press any key to continue...");
-        Console.ReadKey();
     }
 
     public void ViewMainMenu()
