@@ -42,7 +42,7 @@ class View
         foreach (Meeting meeting in meetings)
         {
             NewLineMessage(
-                $"Meeting: '{meeting.MeetingName}' with {meeting.FirstPerson?.Name} and {meeting.SecondPerson?.Name} at {meeting.Date?.ToString(Meeting.NorwegianCulture)}"
+                $"Meeting #{meeting.Id}: '{meeting.MeetingName}' with {meeting.FirstPerson?.Name} and {meeting.SecondPerson?.Name} at {meeting.Date?.ToString(Meeting.NorwegianCulture)}"
             );
         }
     }
