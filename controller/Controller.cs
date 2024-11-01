@@ -2,9 +2,9 @@ using System.Text.RegularExpressions;
 
 class Controller
 {
-    private Person _person;
-    private View _view;
-    private Meeting _meeting;
+    private readonly Person _person;
+    private readonly View _view;
+    private readonly Meeting _meeting;
 
     public Controller(Person person, View view, Meeting meeting)
     {
