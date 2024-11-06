@@ -156,7 +156,7 @@ class Controller
         _view.ViewMeetings(_meeting.GetAllMeetings());
         _view.NewLineMessage("");
         _view.InlineMessage(
-            "Type the number of the person you want to delete or type r to return to main menu: "
+            "Type the number of the meeting you want to delete or type r to return to main menu: "
         );
         int id = _meeting.DeleteMeeting(ParseMeeting());
         _view.NewLineMessage($"Meeting deleted with #{id}");

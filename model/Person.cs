@@ -20,7 +20,7 @@ class Person
     {
         try
         {
-            var db = new SqliteConnection("Data Source=database/person.sqlite");
+            var db = new SqliteConnection("Data Source=database/database.sqlite");
             db.Open();
             using (var cmd = db.CreateCommand())
             {

@@ -32,7 +32,7 @@ class Meeting
     {
         try
         {
-            var db = new SqliteConnection("Data Source=database/meeting.sqlite");
+            var db = new SqliteConnection("Data Source=database/database.sqlite");
             db.Open();
             using (var cmd = db.CreateCommand())
             {
