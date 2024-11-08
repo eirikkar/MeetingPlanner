@@ -25,7 +25,7 @@
 
 ## Diagram
 
-For a detailed overview of the program's architecture, please refer to the [diagram](link-to-diagram).
+For a detailed overview of the program's architecture, please refer to the [diagram](/documentation/diagram.png).
 
 ## Notes
 
